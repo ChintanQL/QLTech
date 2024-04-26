@@ -57,7 +57,8 @@ class FilterGrid extends React.Component {
   }
 
   render() {
-    const posts = this.props.data.allWpPage;
+    console.log("pagessss");
+	  const posts = this.props.data.allWpPage;
    console.log(posts);
     return(
       // Filter Buttons
