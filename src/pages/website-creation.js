@@ -5,15 +5,6 @@ import PropTypes from 'prop-types';
 import Particles from "react-tsparticles";
 import Layout from '../components/Layout'
 import ReactWOW from 'react-wow'
-import port_1 from '../img/portfolio/1.jpg'
-import port_2 from '../img/portfolio/2.jpg'
-import port_3 from '../img/portfolio/3.jpg'
-import port_4 from '../img/portfolio/4.jpg'
-import port_5 from '../img/portfolio/5.jpg'
-import port_6 from '../img/portfolio/6.jpg'
-import port_7 from '../img/portfolio/7.jpg'
-import port_8 from '../img/portfolio/8.jpg'
-
 import Helmet from 'react-helmet'
 class FilterGrid extends React.Component {
   constructor(props) {
@@ -66,8 +57,8 @@ class FilterGrid extends React.Component {
   }
 
   render() {
-    const posts = this.props.data.allWpWork;
-    const category = this.props.data.allWpCategory;
+    const posts = this.props.data.allWpPage;
+   console.log(posts);
     return(
       // Filter Buttons
 	  <Layout>
@@ -122,37 +113,17 @@ const WC = () => (
 	<StaticQuery
     query = {graphql`
       query{
-        allWpWork{
-                        edges {
-                          node {
-                            id
-							slug
-                            work {
-                              mainImage {
-                                sourceUrl
-                              }
-                              title
-                              shortDescprition
-                            }
-							categories {
-                              nodes {
-							  id
-                              name
-							  slug
-                            }
-                            }
-                          }
-                        }
-                      }
-		allWpCategory(filter: {slug: {regex: "/work/"}}, sort: {fields: databaseId, order: ASC}) {	
+       allWpPage(filter: {databaseId: {eq: 5470}}) {
 			edges {
-			  node {
-				id
-				name
-				slug
-			  }
+				node {
+					title
+					databaseId
+					content
+				}
 			}
-		  }			  
+		}
+      }
+					  
     }
   `}
   render={(data, count) => <FilterGrid data={data} count={count} />}
